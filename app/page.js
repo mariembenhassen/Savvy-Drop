@@ -1,3 +1,4 @@
+import AddProductForm from "@/components/AddProductForm";
 import { Button } from "@/components/ui/button";
 import {
   ArrowDownToLine,
@@ -101,8 +102,10 @@ export default function Home() {
           </p>
         </div>
       </section>
+       <AddProductForm user={user}/>
       {/* Features : appear when not logging in */}
-      <div className="grid md:grid-cols-3 gap-8 py-16">
+      {products.length==0 && 
+      <div className="grid md:grid-cols-3 gap-8 py-16">   
         {FEATURES.map((feature, idx) => (
           <div
             key={idx}
@@ -120,6 +123,7 @@ export default function Home() {
           </div>
         ))}
       </div>
+}
     </main>
   );
 }
