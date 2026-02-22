@@ -1,7 +1,7 @@
-"use client";
 import AddProductForm from "@/components/AddProductForm";
 import AuthButton from "@/components/AuthButton";
 import { Button } from "@/components/ui/button";
+import { createClient } from "@/utils/superbase/server";
 import {
   ArrowDownToLine,
   BellRing,
@@ -12,8 +12,12 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-export default function Home() {
-  const user = null;
+export default async function Home() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   const products = [];
   const FEATURES = [
     {
