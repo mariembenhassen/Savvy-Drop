@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
 import { Input } from "./ui/input";
+import { toast } from "sonner";
+import AuthModal from "./AuthModal";
+import { addProduct } from "@/app/actions";
 
 const AddProductForm = ({ user }) => {
   const [url, setUrl] = useState("");
@@ -66,6 +69,10 @@ const AddProductForm = ({ user }) => {
       </form>
 
     {/*    Auth Modal */}
+    <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+      />
     </>
   );
 };
