@@ -1,7 +1,7 @@
 import AddProductForm from "@/components/AddProductForm";
 import AuthButton from "@/components/AuthButton";
 import { Button } from "@/components/ui/button";
-import { createClient } from "@/utils/superbase/server";
+import { createClient } from "@/utils/supabase/server";
 import {
   ArrowDownToLine,
   BellRing,

@@ -1,12 +1,18 @@
 "use client";
-import React, { useState } from "react";
-import { Button } from "./ui/button";
-import { LogIn, LogOut } from "lucide-react";
-import { AuthModal } from "./AuthModal";
-import { signOut } from "@/app/actions";
 
-const AuthButton = ({ user }) => {
+import { useState } from "react";
+import { signOut } from "@/app/actions";
+import AuthModal from "./AuthModal";
+import { Button } from "@/components/ui/button";
+import { LogIn, LogOut } from "lucide-react";
+
+export default function AuthButton({ user }) {
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const handleSignOut = async () => {
+    await signOut();               // server action
+    window.location.href = "/";    // force full reload
+    // or: router.refresh() + router.replace("/") if using useRouter
+  };
   if (user) {
     return (
       <form action={signOut}>
@@ -17,23 +23,23 @@ const AuthButton = ({ user }) => {
       </form>
     );
   }
+
   return (
     <>
       <Button
         onClick={() => setShowAuthModal(true)}
-        variant="defaul"
+        variant="default"
         size="sm"
         className="bg-orange-500 hover:bg-orange-600 gap-2"
       >
         <LogIn className="w-4 h-4" />
         Sign In
       </Button>
+
       <AuthModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
       />
     </>
   );
-};
-
-export default AuthButton;
+}

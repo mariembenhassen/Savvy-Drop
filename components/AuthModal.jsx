@@ -1,5 +1,6 @@
+"use client";
 
-import { createClient } from "@/utils/superbase/client";
+import { createClient } from "@/utils/supabase/client";
 import {
   Dialog,
   DialogContent,
@@ -9,20 +10,21 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-export function AuthModal({ isOpen, onClose }) {
-    const supabase = createClient();
+export default function AuthModal({ isOpen, onClose }) {
+  const supabase = createClient();
 
-    const handleGoogleLogin = async () => {
-      const { origin } = window.location;
-  
-      await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: `${origin}/auth/callback`,
-        },
-      });
-    };
-    return (
+  const handleGoogleLogin = async () => {
+    const { origin } = window.location;
+
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${origin}/auth/callback`,
+      },
+    });
+  };
+
+  return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

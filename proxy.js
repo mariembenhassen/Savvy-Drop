@@ -1,4 +1,4 @@
-import { updateSession } from '@/utils/superbase/middleware'
+import { updateSession } from '@/utils/supabase/middleware'
 
 export async function proxy(request) {
   // update user's auth session
