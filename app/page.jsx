@@ -1,4 +1,6 @@
+"use client";
 import AddProductForm from "@/components/AddProductForm";
+import AuthButton from "@/components/AuthButton";
 import { Button } from "@/components/ui/button";
 import {
   ArrowDownToLine,
@@ -7,7 +9,6 @@ import {
   Lock,
   Sparkles,
   History,
-  LogIn,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -61,14 +62,7 @@ export default function Home() {
             ></Image>
           </div>
           {/*  <AuthButton user={user} />*/}
-          <Button
-            variant="defaul"
-            size="sm"
-            className="bg-orange-500 hover:bg-orange-600 gap-2"
-          >
-            <LogIn className="w-4 h-4" />
-            Sign In{" "}
-          </Button>
+          <AuthButton user={user}/>
         </div>
       </header>
       {/* Hero Section */}
