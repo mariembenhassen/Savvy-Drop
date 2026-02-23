@@ -89,106 +89,105 @@ export default async function Home() {
         </div>
       </header>
       {/* Hero Section */}
-      <section className="relative py-24 md:py-36 px-5 bg-gradient-to-b from-orange-100/70 via-white to-teal-50/50">
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <div className="inline-block mb-6 px-5 py-2 bg-orange-100 text-orange-700 font-semibold rounded-full text-sm md:text-base">
-            Prices change every hour — don't pay full price again
-          </div>
+      <section className="relative pt-10 pb-16 md:pt-16 md:pb-24 lg:pt-20 lg:pb-32 px-5 md:px-8 overflow-hidden">
+    <div className="absolute inset-0 opacity-[0.07] pointer-events-none">
+      <div className="absolute inset-0 bg-[radial-gradient(#fed7aa_1px,transparent_1px)] [background-size:20px_20px]" />
+    </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-gray-900 tracking-tight leading-none mb-6 md:mb-8">
-            Catch the{" "}
-            <span className="text-orange-600 drop-shadow-md">Best Deals</span>
-            <br className="sm:hidden" /> Before They Vanish
-          </h1>
+    <div className="relative max-w-6xl mx-auto text-center z-10">
+      <div className="inline-flex mb-5 md:mb-6 px-5 py-2 bg-orange-100/80 backdrop-blur-sm text-orange-700 font-semibold rounded-full text-sm md:text-base border border-orange-200/50 shadow-sm">
+        Prices refresh hourly , Stop overpaying!
+      </div>
 
-          <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto mb-12 leading-relaxed font-medium">
-            Instant alerts when prices drop on Jumia, Amazon, AliExpress, Shein,
-            Zara, Mytek...
-            <br />
-            Thousands of Tunisians are already saving — join them today.
-          </p>
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight leading-tight mb-5 md:mb-7">
+        Catch the{" "}
+        <span className="text-orange-600">best deals</span>
+        <br className="sm:hidden" /> before they vanish
+      </h1>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-5">
-            <Button
-              size="xl"
-              className="text-xl py-7 px-12 bg-orange-600 hover:bg-orange-700 shadow-2xl hover:shadow-orange-500/30 transition-all"
-            >
-              Start Saving Now – It's Free
-            </Button>
-            <Button
-              variant="secondary"
-              size="xl"
-              className="text-xl py-7 px-12 border-2 border-gray-300 hover:bg-gray-50"
-            >
-              See Real Savings Examples →
-            </Button>
-          </div>
+      <p className="text-lg sm:text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
+        Instant drop alerts from Jumia • Amazon • AliExpress • Shein • Zara • Mytek…
+        <br className="hidden sm:block" />
+        Thousands of Tunisians are already saving — <span className="font-semibold text-gray-900">join them</span>.
+      </p>
 
-          <p className="mt-8 text-base text-gray-600">
-            No payment info required • Cancel anytime
-          </p>
+      {/* Quick CTA – very helpful for conversion */}
+      {!user && (
+        <div className="mt-8 md:mt-10">
+          <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg">
+            Start Tracking Deals →
+          </Button>
         </div>
+      )}
+    </div>
+  </section>
+  <div className="relative z-10">
+{/* Add Product Form */}
+<section className="max-w-4xl mx-auto px-5 md:px-8 -mt-8 md:-mt-12">
+      <div className="bg-white/80 backdrop-blur-md border border-gray-200/60 rounded-2xl shadow-xl p-6 md:p-8 lg:p-10">
+        <AddProductForm user={user} />
+      </div>
       </section>
-      <AddProductForm user={user} />
-      
-      <br/>
-      <section>
-        {/* Products Grid */}
-        {user && products.length > 0 && (
-          <section className="max-w-7xl mx-auto px-4 pb-20">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900">
-                Your Tracked Products
-              </h3>
-              <span className="text-sm text-gray-500">
-                {products.length}{" "}
-                {products.length === 1 ? "product" : "products"}
+   {/* Logged-in: User's products */}
+    {user && (
+      <section className="max-w-7xl mx-auto px-5 md:px-8 py-12 md:py-16">
+        {products.length > 0 ? (
+          <>
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Your Tracked Products</h2>
+              <span className="text-sm md:text-base text-gray-600 font-medium">
+                {products.length} {products.length === 1 ? "product" : "products"}
               </span>
             </div>
-
-            <div className="grid gap-6 md:grid-cols-2 items-start">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
-          </section>
+          </>
+        ) : (
+          <div className="max-w-2xl mx-auto text-center py-12">
+            <div className="bg-white border-2 border-dashed border-orange-200/50 rounded-2xl p-10 md:p-12">
+              <TrendingDown className="w-16 h-16 md:w-20 md:h-20 text-orange-400 mx-auto mb-6 opacity-80" />
+              <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3">
+                No products tracked yet
+              </h3>
+              <p className="text-gray-600 md:text-lg">
+                Add your first item above and start saving!
+              </p>
+            </div>
+          </div>
         )}
       </section>
-      {/* Features : appear when not logging in */}
-      {products.length == 0 && (
-        <div className="grid md:grid-cols-3 gap-8 py-16">
+    )}
+
+    {/* Features – only for non-logged-in or no products */}
+    {(!user || products.length === 0) && (
+      <section className="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20 lg:py-24 bg-gradient-to-b from-white to-teal-50/30">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12 md:mb-16">
+          Why Tunisians Love Savvy Drop
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
           {FEATURES.map((feature, idx) => (
             <div
               key={idx}
-              className="bg-white/70 backdrop-blur-sm border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-md transition-all"
+              className="group bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-2xl p-7 md:p-8 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-6">
-                <feature.icon className="w-8 h-8 text-orange-600" />
+              <div className="w-14 h-14 md:w-16 md:h-16 bg-orange-100/80 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-200/60 transition-colors">
+                <feature.icon className="w-8 h-8 md:w-9 md:h-9 text-orange-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
                 {feature.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed text-base md:text-lg">
                 {feature.description}
               </p>
             </div>
           ))}
         </div>
-      )}
-      {/* Empty State */}
-      {user && products.length === 0 && (
-        <section className="max-w-2xl mx-auto px-4 pb-20 text-center">
-          <div className="bg-white rounded-xl border-2 border-dashed border-gray-300 p-12">
-            <TrendingDown className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              No products yet
-            </h3>
-            <p className="text-gray-600">
-              Add your first product above to start tracking prices!
-            </p>
-          </div>
-        </section>
-      )}
-    </main>
+      </section>
+    )}
+  </div>
+</main>
   );
 }
